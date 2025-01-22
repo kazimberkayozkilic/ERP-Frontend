@@ -31,7 +31,7 @@
           }@else if (menu.subMenus.length > 0) {
             <li class="nav-item">
               <a class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="nav-icon {{menu.icon}}"></i>
                 <p>
                   {{menu.name}}
                   <i class="right fas fa-angle-left"></i>
@@ -41,8 +41,8 @@
                 @for(subMenu of menu.subMenus; track subMenu)
                 {
                   <li class="nav-item">
-                    <a [routerLink]="subMenu.url" class="nav-link">
-                      <i class="{{subMenu.icon}}"></i>
+                    <a [routerLink]="subMenu.url" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link">
+                      <i class="{{subMenu.icon}} me-2"></i>
                       <p>{{subMenu.name}}</p>
                     </a>
                 }
@@ -50,7 +50,7 @@
             </li>
           }@else {
             <li class="nav-item">
-              <a [routerLink]="menu.url" class="nav-link">
+              <a [routerLink]="menu.url" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link">
                 <i class="nav-icoon {{menu.icon}}"></i>
                 <p>
                   {{menu.name}}
