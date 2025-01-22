@@ -13,6 +13,12 @@ import { FormsModule } from '@angular/forms';
     BlankComponent,
     SectionComponent,
     FormsModule
+  ],
+  exports:[
+    CommonModule,
+    BlankComponent,
+    SectionComponent,
+    FormsModule
   ]
 })
 export class SharedModule { }

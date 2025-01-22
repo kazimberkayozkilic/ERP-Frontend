@@ -9,7 +9,8 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./blank.component.css']
 })
 export class BlankComponent {
+  @Input() pageName: string = "";
   @Input() routes: string[] = [];
-  @Input() PageName: string = "";
+
 }
 
