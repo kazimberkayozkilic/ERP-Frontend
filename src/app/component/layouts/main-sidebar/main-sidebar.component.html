@@ -22,47 +22,43 @@
         </div>
       </div>
     </div>
+
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Dashboard
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
+        @for(menu of menus; track menu){
+          @if(menu.isTitle){
+            <li class="nav-header">{{menu.name}}</li>
+          }@else if (menu.subMenus.length > 0) {
             <li class="nav-item">
-              <a href="assets/index.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Dashboard v1</p>
+              <a class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  {{menu.name}}
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @for(subMenu of menu.subMenus; track subMenu)
+                {
+                  <li class="nav-item">
+                    <a [routerLink]="subMenu.url" class="nav-link">
+                      <i class="{{subMenu.icon}}"></i>
+                      <p>{{subMenu.name}}</p>
+                    </a>
+                }
+              </ul>
+            </li>
+          }@else {
+            <li class="nav-item">
+              <a [routerLink]="menu.url" class="nav-link">
+                <i class="nav-icoon {{menu.icon}}"></i>
+                <p>
+                  {{menu.name}}
+                </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="assets/index2.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Dashboard v2</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="assets/index3.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Dashboard v3</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-header">EXAMPLES</li>
-        <li class="nav-item">
-          <a href="../calendar.html" class="nav-link">
-            <i class="nav-icon far fa-calendar-alt"></i>
-            <p>
-              Calendar
-              <span class="badge badge-info right">2</span>
-            </p>
-          </a>
-        </li>
+          }
+        }
       </ul>
     </nav>
   </div>

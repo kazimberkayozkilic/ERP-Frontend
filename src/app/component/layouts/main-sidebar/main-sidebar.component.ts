@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
+import { Menus } from '../../../menu';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main-sidebar',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './main-sidebar.component.html',
-  styleUrl: './main-sidebar.component.css'
+  styleUrls: ['./main-sidebar.component.css']
 })
 export class MainSidebarComponent {
-
+  menus = Menus;
 }
