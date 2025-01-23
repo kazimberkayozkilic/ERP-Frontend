@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { UserModel } from '../modules/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
   token: string = '';
-  user: any;
+  user: UserModel = new UserModel();
   constructor(
     private router: Router,
   ) {}
