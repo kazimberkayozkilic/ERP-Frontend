@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { api } from '../constants';
 import { ResultModel } from '../models/result.mode';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,13 @@ import { ResultModel } from '../models/result.mode';
 export class HttpService {
   constructor(
     private http: HttpClient,
+    private auth: AuthServiceService
   ) { }
 
   post<T>(apiUrl:string, body:any, callBack:(res:T)=>void, errorCallBack?:()=> void){
     this.http.post<ResultModel<T>>(`${api}/${apiUrl}`, body,{
       headers: {
-        "Authorization": "Bearer " + "token"
+        "Authorization": "Bearer " + this.auth.token
       }
     }).subscribe({
         next: (res)=> {
