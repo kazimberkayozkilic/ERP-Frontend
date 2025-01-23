@@ -15,6 +15,10 @@ export class AuthServiceService {
 
   isAuthenticated() {
     this.token = localStorage.getItem('token') ?? '';
+    if(this.token ===""){
+      this.router.navigateByUrl("/login");
+      return false;
+    }
     const decode: JwtPayload | any = jwtDecode(this.token);
     const exp = decode.exp;
     const now = new Date().getTime() / 1000;
