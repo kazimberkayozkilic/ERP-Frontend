@@ -31,7 +31,7 @@ export class AuthServiceService {
     this.user.id = decode["Id"];
     this.user.name = decode["Name"];
     this.user.email = decode["Email"];
-    this.user.userName = decode["userName"];
+    this.user.userName = decode["UserName"];
 
     return true;
   }
