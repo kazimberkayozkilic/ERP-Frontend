@@ -7,18 +7,19 @@ import { UserModel } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthServiceService {
-  token: string = '';
+  token: string = "";
   user: UserModel = new UserModel();
   constructor(
-    private router: Router,
-  ) {}
+    private router: Router
+  ) { }
 
-  isAuthenticated() {
-    this.token = localStorage.getItem('token') ?? '';
-    if(this.token ===""){
+  isAuthenticated(){
+    this.token = localStorage.getItem("token") ?? "";
+    if(this.token === ""){
       this.router.navigateByUrl("/login");
       return false;
     }
+
     const decode: JwtPayload | any = jwtDecode(this.token);
     const exp = decode.exp;
     const now = new Date().getTime() / 1000;
@@ -32,6 +33,11 @@ export class AuthServiceService {
     this.user.name = decode["Name"];
     this.user.email = decode["Email"];
     this.user.userName = decode["UserName"];
+
+    console.log(this.user);
+    console.log(this.token, "token");
+
+
 
     return true;
   }
