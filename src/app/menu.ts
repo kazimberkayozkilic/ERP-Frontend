@@ -14,4 +14,19 @@ export const Menus: MenuModel[] = [
     isTitle: false,
     subMenus: [],
   },
+  {
+    name: 'Ana Group',
+    icon: 'far fa-list-alt',
+    url: '',
+    isTitle: false,
+    subMenus: [
+      {
+        name: 'Müşteri',
+        icon: 'far fa-solid fa-users',
+        url: '/customers',
+        isTitle: false,
+        subMenus: [],
+      },
+    ],
+  },
 ];
