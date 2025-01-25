@@ -36,14 +36,15 @@
           </tr>
         </thead>
         <tbody>
+          @for(customer of customers;track customer){
           <tr>
-            <td>1</td>
-            <td>Deneme</td>
-            <td>Deneme</td>
-            <td>Deneme</td>
-            <td>Deneme</td>
-            <td>Deneme</td>
-            <td>Deneme</td>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.taxDepartment }}</td>
+            <td>{{ customer.taxNumber }}</td>
+            <td>{{ customer.city }}</td>
+            <td>{{ customer.town }}</td>
+            <td>{{ customer.fullAddress }}</td>
             <td>
               <button
                 data-toggle="modal"
@@ -57,6 +58,7 @@
               </button>
             </td>
           </tr>
+          }
         </tbody>
       </table>
     </div>
