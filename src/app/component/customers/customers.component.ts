@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from '../../modules/shared.module';
 import { CustomerModel } from '../../models/customer.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CustomerPipe } from '../../pipes/customer.pipe';
 import { api } from '../../constants';
 import { NgForm } from '@angular/forms';
 import { SwalService } from '../../sevices/swal.service';
+import { HttpService } from '../../sevices/http.service';
 
 @Component({
   selector: 'app-customers',
@@ -22,29 +23,29 @@ export class CustomersComponent implements OnInit {
 
   createModel: CustomerModel = new CustomerModel();
   updateModel: CustomerModel = new CustomerModel();
-  constructor(private http: HttpClient, private swal: SwalService) {}
+  constructor(private http: HttpService, private swal: SwalService) {}
 
   ngOnInit(): void {
     this.getAllCustomers();
   }
 
+
   getAllCustomers() {
-    this.http
-      .post<CustomerModel[]>(`${api}/Customers/GetAll`, {})
-      .subscribe((res) => {
-        this.customers = res;
-        console.log(this.customers, 'aaaaaa');
-      });
+    this.http.post<CustomerModel[]>(
+      "Customers/GetAll",
+      {},(res) => {
+      this.customers = res;
+      console.log(this.customers, 'aaaaaa');
+    });
   }
 
   createCustomer(form: NgForm) {
-    this.http.post<string>(
-      `${api}/Customers/Create`,
-      this.createCustomer)
-      .subscribe((res) => {
+    if(form.valid){
+      this.http.post<string>("Customers/Create", this.createCustomer,(res)=> {
         this.swal.callToast(res);
-        this.createModel = new CustomerModel();
+        this.createModel= new CustomerModel();
         this.createModalCloseBtn?.nativeElement.click();
       });
+    }
   }
 }
