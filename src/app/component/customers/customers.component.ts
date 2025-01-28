@@ -58,4 +58,8 @@ export class CustomersComponent implements OnInit {
       })
     });
   }
+
+  getCustomer(model: CustomerModel){
+    this.updateModel= {...model};
+  }
 }
