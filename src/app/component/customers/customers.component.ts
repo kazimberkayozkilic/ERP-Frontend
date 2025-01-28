@@ -49,4 +49,13 @@ export class CustomersComponent implements OnInit {
       });
     }
   }
+
+  deleteByIdCustomer(model: CustomerModel){
+    this.swal.callSwal("Müşteri Sil", `${model.name}`,() => {
+      this.http.post<string>("Customers/DeleteById", {id:model.id}, (res)=>{
+        this.getAllCustomers();
+        this.swal.callToast(res, "info");
+      })
+    });
+  }
 }
