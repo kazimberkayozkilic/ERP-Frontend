@@ -25,7 +25,7 @@ export class DepotsComponent implements OnInit {
   createModel: DepotModel = new DepotModel();
   constructor(private http: HttpService, private swal: SwalService) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.getAllDepots();
   }
 
   getAllDepots() {
