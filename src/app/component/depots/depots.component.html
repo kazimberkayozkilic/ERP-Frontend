@@ -34,7 +34,7 @@
                       <td>{{data.town}}</td>
                       <td>{{data.fullAddress}}</td>
                       <td>
-                          <button data-toggle="modal" data-target="#updateModal" class="btn btn-outline-primary btn-sm me-1">
+                          <button (click)="getDepot(data)" data-toggle="modal" data-target="#updateModal" class="btn btn-outline-primary btn-sm me-1">
                               <i class="fa-solid fa-edit"></i>
                           </button>
                           <button (click)="deleteByIdDepo(data)" class="btn btn-outline-danger btn-sm">
@@ -109,11 +109,11 @@
                   <i class="fa-solid fa-x"></i>
               </button>
           </div>
-          <form formValidate  autocomplete="off" >
+          <form formValidate #updateForm="ngForm" autocomplete="off" (ngSubmit)="updateDepot(updateForm)">
               <div class="modal-body">
                   <div class="form-group">
                       <label>Depo Adı</label>
-                      <input type="text" required minlength="3"  class="form-control" name="updateName">
+                      <input type="text" required minlength="3" [(ngModel)]="updateModel.name" class="form-control" name="updateName">
                       <div class="invalid-feedback"></div>
                   </div>
 
@@ -121,14 +121,14 @@
                       <div class="col-6">
                           <div class="form-group mt-2">
                               <label>Şehir</label>
-                              <input type="text" required minlength="3"  class="form-control" name="updateCity">
+                              <input type="text" required minlength="3" [(ngModel)]="updateModel.city" class="form-control" name="updateCity">
                               <div class="invalid-feedback"></div>
                           </div>
                       </div>
                       <div class="col-6">
                           <div class="form-group mt-2">
                               <label>İlçe</label>
-                              <input type="text" required minlength="3"  class="form-control" name="updateTown">
+                              <input type="text" required minlength="3" [(ngModel)]="updateModel.town" class="form-control" name="updateTown">
                               <div class="invalid-feedback"></div>
                           </div>
                       </div>
@@ -136,7 +136,7 @@
 
                   <div class="form-group mt-2">
                       <label>Açık Adres</label>
-                      <textarea class="form-control" required minlength="3" name="updateFullAddress" rows="5"></textarea>
+                      <textarea class="form-control" required minlength="3" [(ngModel)]="updateModel.fullAddress" name="updateFullAddress" rows="5"></textarea>
                       <div class="invalid-feedback"></div>
                   </div>
               </div>
@@ -147,3 +147,4 @@
       </div>
   </div>
 </div>
+

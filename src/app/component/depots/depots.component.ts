@@ -21,8 +21,12 @@ export class DepotsComponent implements OnInit {
     | ElementRef<HTMLButtonElement>
     | undefined;
 
+  @ViewChild('updateModalCloseBtn') updateModalCloseBtn:
+    | ElementRef<HTMLButtonElement>
+    | undefined;
 
   createModel: DepotModel = new DepotModel();
+  updateModel: DepotModel = new DepotModel();
   constructor(private http: HttpService, private swal: SwalService) {}
   ngOnInit(): void {
     this.getAllDepots();
@@ -49,6 +53,20 @@ export class DepotsComponent implements OnInit {
         this.swal.callToast(res);
         this.createModel = new DepotModel();
         this.createModalCloseBtn?.nativeElement.click();
+        this.getAllDepots();
+      });
+    }
+  }
+
+  getDepot(model: DepotModel) {
+    this.updateModel = {...model};
+  }
+
+  updateDepot (form: NgForm) {
+    if(form.valid){
+      this.http.post<string>("Depots/Update", this.updateModel,(res)=> {
+        this.swal.callToast(res, "info");
+        this.updateModalCloseBtn?.nativeElement.click();
         this.getAllDepots();
       });
     }
