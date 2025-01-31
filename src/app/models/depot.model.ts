@@ -3,5 +3,5 @@ export class DepotModel{
   name: string="";
   city: string="";
   town: string="";
-  fullAdress: string="";
+  fullAddress: string="";
 }

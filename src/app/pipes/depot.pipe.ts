@@ -16,7 +16,7 @@ export class DepotPipe implements PipeTransform {
     p.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())||
     p.city.toLocaleLowerCase().includes(search.toLocaleLowerCase())||
     p.town.toLocaleLowerCase().includes(search.toLocaleLowerCase())||
-    p.fullAdress.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+    p.fullAddress.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     );
    }
 
