@@ -1,7 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from '../../modules/shared.module';
 import { ProductPipe } from '../../pipes/product.pipe';
-import { ProductModel, ProductTypeEnum, ProductTypes } from '../../models/product.model';
+import {
+  ProductModel,
+  ProductTypeEnum,
+  ProductTypes,
+} from '../../models/product.model';
 import { HttpService } from '../../sevices/http.service';
 import { SwalService } from '../../sevices/swal.service';
 import { NgForm } from '@angular/forms';
@@ -22,8 +26,12 @@ export class ProductsComponent implements OnInit {
     | ElementRef<HTMLButtonElement>
     | undefined;
 
-  createModel: ProductModel = new ProductModel();
+  @ViewChild('updateModalCloseBtn') updateModalCloseBtn:
+    | ElementRef<HTMLButtonElement>
+    | undefined;
 
+  createModel: ProductModel = new ProductModel();
+  updateModel: ProductModel = new ProductModel();
   constructor(private http: HttpService, private swal: SwalService) {}
 
   ngOnInit(): void {
@@ -37,22 +45,37 @@ export class ProductsComponent implements OnInit {
   }
 
   deleteByIdProduct(model: ProductModel) {
-      this.swal.callSwal('Ürün Sil', `${model.name}`, () => {
-        this.http.post<string>('Products/DeleteById', { id: model.id }, (res) => {
-          this.getAllProducts();
-          this.swal.callToast(res, 'info');
-        });
+    this.swal.callSwal('Ürün Sil', `${model.name}`, () => {
+      this.http.post<string>('Products/DeleteById', { id: model.id }, (res) => {
+        this.getAllProducts();
+        this.swal.callToast(res, 'info');
       });
-    }
+    });
+  }
 
   createProduct(form: NgForm) {
-      if (form.valid) {
-        this.http.post<string>('Products/Create', this.createModel, (res) => {
-          this.swal.callToast(res);
-          this.createModel = new ProductModel();
-          this.createModalCloseBtn?.nativeElement.click();
-          this.getAllProducts();
-        });
-      }
+    if (form.valid) {
+      this.http.post<string>('Products/Create', this.createModel, (res) => {
+        this.swal.callToast(res);
+        this.createModel = new ProductModel();
+        this.createModalCloseBtn?.nativeElement.click();
+        this.getAllProducts();
+      });
     }
+  }
+
+  getProduct(model: ProductModel) {
+    this.updateModel = { ...model };
+    this.updateModel.typeValue = model.type.value;
+  }
+
+  updateProduct(form: NgForm) {
+    if (form.valid) {
+      this.http.post<string>('Products/Update', this.updateModel, (res) => {
+        this.swal.callToast(res, 'info');
+        this.updateModalCloseBtn?.nativeElement.click();
+        this.getAllProducts();
+      });
+    }
+  }
 }
