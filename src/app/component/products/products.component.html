@@ -20,7 +20,6 @@
                       <th>#</th>
                       <th>Ürün Adı</th>
                       <th>Ürün Tipi</th>
-                      <th>Stok Adedi</th>
                       <th>İşlemler</th>
                   </tr>
               </thead>
@@ -57,20 +56,20 @@
                   <i class="fa-solid fa-x"></i>
               </button>
           </div>
-          <form formValidate  autocomplete="off" >
+          <form formValidate #createForm="ngForm" autocomplete="off" (ngSubmit)="createProduct(createForm)">
               <div class="modal-body">
                   <div class="form-group">
                       <label>Ürün Adı</label>
-                      <input type="text" required minlength="3" class="form-control" name="name">
+                      <input type="text" required minlength="3" [(ngModel)]="createModel.name" class="form-control" name="name">
                       <div class="invalid-feedback"></div>
                   </div>
 
                   <div class="form-group mt-2">
                       <label>Ürün Tipi</label>
-                      <select class="form-control" name="type" required>
-
-                              <option [value]=""></option>
-
+                      <select class="form-control" name="type" [(ngModel)]="createModel.typeValue" required>
+                          @for(type of types; track type){
+                              <option [value]="type.value">{{type.name}}</option>
+                          }
                       </select>
                       <div class="invalid-feedback"></div>
                   </div>
@@ -82,6 +81,7 @@
       </div>
   </div>
 </div>
+
 
 <!-- Update Modal -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">

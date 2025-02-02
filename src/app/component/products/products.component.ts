@@ -1,31 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from '../../modules/shared.module';
 import { ProductPipe } from '../../pipes/product.pipe';
-import { ProductModel } from '../../models/product.model';
+import { ProductModel, ProductTypeEnum, ProductTypes } from '../../models/product.model';
 import { HttpService } from '../../sevices/http.service';
 import { SwalService } from '../../sevices/swal.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [SharedModule, ProductPipe],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
   products: ProductModel[] = [];
-  search: string="";
+  search: string = '';
+  types: ProductTypeEnum[] = ProductTypes;
 
+  @ViewChild('createModalCloseBtn') createModalCloseBtn:
+    | ElementRef<HTMLButtonElement>
+    | undefined;
 
-  constructor(private http: HttpService, private Swal: SwalService) {}
+  createModel: ProductModel = new ProductModel();
+
+  constructor(private http: HttpService, private swal: SwalService) {}
 
   ngOnInit(): void {
     this.getAllProducts();
   }
 
   getAllProducts() {
-      this.http.post<ProductModel[]>('Products/GetAll', {}, (res) => {
-        this.products = res;
-      });
+    this.http.post<ProductModel[]>('Products/GetAll', {}, (res) => {
+      this.products = res;
+    });
+  }
+
+  createProduct(form: NgForm) {
+      if (form.valid) {
+        this.http.post<string>('Products/Create', this.createModel, (res) => {
+          this.swal.callToast(res);
+          this.createModel = new ProductModel();
+          this.createModalCloseBtn?.nativeElement.click();
+          this.getAllProducts();
+        });
+      }
     }
 }
