@@ -34,6 +34,13 @@ export const Menus: MenuModel[] = [
         isTitle: false,
         subMenus: [],
       },
+      {
+        name: 'Ürünler',
+        icon: 'fa-brands fa-product-hunt',
+        url: '/products',
+        isTitle: false,
+        subMenus: [],
+      },
     ],
   },
 ];
