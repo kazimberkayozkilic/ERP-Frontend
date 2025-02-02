@@ -36,6 +36,15 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  deleteByIdProduct(model: ProductModel) {
+      this.swal.callSwal('Ürün Sil', `${model.name}`, () => {
+        this.http.post<string>('Products/DeleteById', { id: model.id }, (res) => {
+          this.getAllProducts();
+          this.swal.callToast(res, 'info');
+        });
+      });
+    }
+
   createProduct(form: NgForm) {
       if (form.valid) {
         this.http.post<string>('Products/Create', this.createModel, (res) => {
