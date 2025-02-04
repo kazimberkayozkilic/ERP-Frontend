@@ -28,9 +28,9 @@
                     <td>{{$index + 1}}</td>
                     <td>{{data.product.name}}</td>
                     <td>
-                        <button class="btn btn-outline-danger btn-sm">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                      <button (click)="deleteById(data)" class="btn btn-outline-danger btn-sm">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                     </td>
                 </tr>
                 }
@@ -103,7 +103,7 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  @for(data of createModel.recipeDetails;track data){
+                                  @for(data of createModel.details;track data){
                                       <tr>
                                           <td>{{$index + 1}}</td>
                                           <td>{{data.product.name}}</td>

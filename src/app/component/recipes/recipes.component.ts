@@ -52,14 +52,12 @@ export class RecipesComponent implements OnInit {
     if (product) {
       this.detail.product = product;
     }
-
-    this.createModel.recipeDetails.push(this.detail);
-
+    this.createModel.details.push(this.detail);
     this.detail = new RecipeDetailModel();
   }
 
   removeDetail(index: number) {
-    this.createModel.recipeDetails.splice(index, 1);
+    this.createModel.details.splice(index, 1);
   }
 
   create(form: NgForm) {
@@ -71,5 +69,14 @@ export class RecipesComponent implements OnInit {
         this.getAllRecipes();
       });
     }
+  }
+
+  deleteById(model: RecipeModel){
+    this.swal.callSwal("Reçeteyi Sil?",`${model.product.name} ürüne ait reçeti silmek istiyor musunuz?`,()=> {
+      this.http.post<string>("Recipes/DeleteById",{id: model.id},(res)=> {
+        this.getAllRecipes();
+        this.swal.callToast(res,"info");
+      });
+    })
   }
 }
