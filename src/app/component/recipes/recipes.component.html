@@ -50,16 +50,16 @@
                   <i class="fa-solid fa-x"></i>
               </button>
           </div>
-          <form formValidate  autocomplete="off" >
+          <form formValidate #createForm="ngForm" autocomplete="off" (ngSubmit)="create(createForm)">
               <div class="modal-body">
                   <div class="form-group">
                       <label>Reçete Oluşturulacak Ürün</label>
-                      <select class="form-control" name="productId" required>
-
-                              <option >
-                                  <span></span>
+                      <select class="form-control" [(ngModel)]="createModel.productId" name="productId" required>
+                          @for(product of products; track product){
+                              <option [value]="product.id">{{product.name}}
+                                  <span>({{product.type.name}})</span>
                               </option>
-
+                          }
                       </select>
                       <div class="invalid-feedback"></div>
                   </div>
@@ -70,24 +70,24 @@
                           <div class="col-6">
                               <div class="form-group">
                                   <label>Yarı Mamül</label>
-                                  <select class="form-control" >
-
-                                          <option ></option>
-
+                                  <select class="form-control" [(ngModel)]="detail.productId" [ngModelOptions]="{standalone:true}">
+                                      @for(product of semiProducts; track product){
+                                          <option [value]="product.id">{{product.name}}</option>
+                                      }
                                   </select>
                               </div>
                           </div>
                           <div class="col-3">
                               <div class="form-group">
                                   <label>Adet</label>
-                                  <input class="form-control" >
+                                  <input class="form-control" [(ngModel)]="detail.quantity" [ngModelOptions]="{standalone:true}">
                               </div>
                           </div>
                           <div class="col-3">
                               <div class="form-group">
                                   <label>İşlemler</label>
                                   <br>
-                                  <button type="button" class="btn btn-dark" >Ekle</button>
+                                  <button type="button" class="btn btn-dark" (click)="addDetail()">Ekle</button>
                               </div>
                           </div>
                       </div>
@@ -103,18 +103,18 @@
                                   </tr>
                               </thead>
                               <tbody>
-
+                                  @for(data of createModel.recipeDetails;track data){
                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
+                                          <td>{{$index + 1}}</td>
+                                          <td>{{data.product.name}}</td>
+                                          <td>{{data.quantity}}</td>
                                           <td>
-                                              <button  class="btn btn-outline-danger btn-sm">
+                                              <button (click)="removeDetail($index)" class="btn btn-outline-danger btn-sm">
                                                   <i class="fa-solid fa-trash"></i>
                                               </button>
                                           </td>
                                       </tr>
-
+                                  }
                               </tbody>
                           </table>
                       </div>
