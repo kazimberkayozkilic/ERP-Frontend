@@ -7,11 +7,12 @@ import { HttpService } from '../../sevices/http.service';
 import { SwalService } from '../../sevices/swal.service';
 import { RecipeDetailModel } from '../../models/recipe-detail.model';
 import { NgForm } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [SharedModule, RecipePipe],
+  imports: [SharedModule, RecipePipe, RouterLink],
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.css',
 })
