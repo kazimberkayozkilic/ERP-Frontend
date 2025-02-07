@@ -4,6 +4,7 @@ import { HttpService } from '../../sevices/http.service';
 import { RecipeDetailModel } from '../../models/recipe-detail.model';
 import { RecipeModel } from '../../models/recipe.model';
 import { ProductModel } from '../../models/product.model';
+import { SwalService } from '../../sevices/swal.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -20,7 +21,7 @@ export class RecipeDetailsComponent implements OnInit {
   search:string = "";
   createModel:RecipeDetailModel = new RecipeDetailModel();
   updateModel:RecipeDetailModel = new RecipeDetailModel();
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService, private swal: SwalService) {}
   ngOnInit(): void {
     this.getAllProducts();
   }
@@ -38,5 +39,20 @@ export class RecipeDetailsComponent implements OnInit {
     this.http.post<ProductModel[]>("Products/GetAll",{},(res)=> {
       this.products = res.filter(p=> p.type.value == 2);
     });
+  }
+
+  get(model: RecipeDetailModel){
+    this.updateModel = {...model};
+    this.updateModel.product = this.products.find(p=> p.id == this.updateModel.productId) ?? new ProductModel();
+    this.isUpdateFormActive = true;
+  }
+
+  deleteById(model: RecipeDetailModel){
+    this.swal.callSwal("Reçetedeki Ürünü Sil?",`${model.product.name} ürününü silmek istiyor musunuz?`,()=> {
+      this.http.post<string>("RecipeDetails/DeleteById",{id: model.id},(res)=> {
+        this.getRecipeById();
+        this.swal.callToast(res,"info");
+      });
+    })
   }
 }
