@@ -31,6 +31,7 @@ export class RecipeDetailsComponent implements OnInit {
     this.activated.params.subscribe((res) => {
       this.recipeId = res['id'];
       this.getRecipeById();
+      this.createModel.recipeId = this.recipeId;
     });
   }
   ngOnInit(): void {
@@ -60,6 +61,16 @@ export class RecipeDetailsComponent implements OnInit {
     this.isUpdateFormActive = true;
   }
 
+  update(form: NgForm){
+    if(form.valid){
+      this.http.post<string>("RecipeDetails/Update",this.updateModel,(res)=> {
+        this.swal.callToast(res,"info");
+        this.getRecipeById();
+        this.isUpdateFormActive = false;
+      });
+    }
+  }
+
   deleteById(model: RecipeDetailModel) {
     this.swal.callSwal(
       'Reçetedeki Ürünü Sil?',
@@ -82,6 +93,7 @@ export class RecipeDetailsComponent implements OnInit {
         this.http.post<string>('RecipeDetails/Create', this.createModel, (res) => {
           this.swal.callToast(res);
           this.createModel = new RecipeDetailModel();
+          this.createModel.recipeId = this.recipeId;
           this.getRecipeById();
         });
       }
