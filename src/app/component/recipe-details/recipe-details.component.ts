@@ -6,6 +6,7 @@ import { RecipeModel } from '../../models/recipe.model';
 import { ProductModel } from '../../models/product.model';
 import { SwalService } from '../../sevices/swal.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-details',
@@ -75,4 +76,14 @@ export class RecipeDetailsComponent implements OnInit {
       }
     );
   }
+
+  create(form: NgForm) {
+      if (form.valid) {
+        this.http.post<string>('RecipeDetails/Create', this.createModel, (res) => {
+          this.swal.callToast(res);
+          this.createModel = new RecipeDetailModel();
+          this.getRecipeById();
+        });
+      }
+    }
 }
