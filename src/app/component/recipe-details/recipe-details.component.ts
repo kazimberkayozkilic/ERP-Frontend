@@ -28,7 +28,7 @@ export class RecipeDetailsComponent implements OnInit {
     private swal: SwalService,
     private activated: ActivatedRoute
   ) {
-    this.activated.params.subscribe((res) => {
+    this.activated.params.subscribe(res => {
       this.recipeId = res['id'];
       this.getRecipeById();
       this.createModel.recipeId = this.recipeId;
