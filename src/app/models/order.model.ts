@@ -10,5 +10,11 @@ export class OrderModel{
   deliveryDate: string="";
   customerId: string="";
   customer: CustomerModel= new CustomerModel();
+  status: OrderStatusEnum = new OrderStatusEnum();
   details: OrderDetailModel[] = [];
+}
+
+export class OrderStatusEnum{
+  value: number =1;
+  name: string ="";
 }
