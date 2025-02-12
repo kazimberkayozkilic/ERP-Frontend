@@ -6,6 +6,7 @@ export class OrderModel{
   orderNumber: number =0;
   orderNumberYear: number =0;
   date: string ="";
+  number: string ="";
   deliveryDate: string="";
   customerId: string="";
   customer: CustomerModel= new CustomerModel();
