@@ -104,14 +104,14 @@
                           <div class="col-3">
                               <div class="form-group">
                                   <label>Birim Fiyatı</label>
-                                  <input class="form-control" [(ngModel)]="createDetail.price" [ngModelOptions]="{standalone:true}">
+                                  <input class="form-control" [(ngModel)]="createDetail.price " [ngModelOptions]="{standalone:true}">
                               </div>
                           </div>
                           <div class="col-3">
                               <div class="form-group">
                                   <label>Toplam</label>
                                   <br>
-                                  <label>{{(createDetail.price * createDetail.quantity)}}</label>
+                                  <label>{{(createDetail.price * createDetail.quantity) | currency: 'TRY': '₺'}}</label>
                               </div>
                           </div>
                           <div class="col-12 mt-2">
@@ -137,8 +137,8 @@
                                           <td>{{$index + 1}}</td>
                                           <td>{{data.product.name}}</td>
                                           <td>{{data.quantity}}</td>
-                                          <td>{{data.price}}</td>
-                                          <td>{{(data.price * data.quantity)}}</td>
+                                          <td>{{data.price | currency: 'TRY': '₺'}}</td>
+                                          <td>{{(data.price * data.quantity)| currency: 'TRY': '₺'}}</td>
                                           <td>
                                               <button (click)="removeDetail($index)" class="btn btn-outline-danger btn-sm">
                                                   <i class="fa-solid fa-trash"></i>
