@@ -90,4 +90,13 @@ export class OrderComponent {
   removeDetail(index:number){
     this.createModel.details.splice(index,1);
   }
+
+  deleteById(model: OrderModel){
+    this.swal.callSwal("Siparişi Sil?",`${model.customer.name} - ${model.number} numaralı siparişi silmek istiyor musunuz?`,()=> {
+      this.http.post<string>("Orders/DeleteById",{id: model.id},(res)=> {
+        this.getAll();
+        this.swal.callToast(res,"info");
+      });
+    })
+  }
 }

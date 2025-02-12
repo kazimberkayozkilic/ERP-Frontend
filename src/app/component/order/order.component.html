@@ -35,6 +35,11 @@
                     <td>{{data.customer.name}}</td>
                     <td>{{data.deliveryDate | date:'dd.MM.yyyy'}}</td>
                     <td>{{data.status.name}}</td>
+                    <td>
+                      <button (click)="deleteById(data)" class="btn btn-outline-danger btn-sm">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                    </td>
                   </tr>
                   }
               </tbody>
