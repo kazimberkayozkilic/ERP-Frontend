@@ -50,4 +50,11 @@ export const Menus: MenuModel[] = [
       },
     ],
   },
+  {
+    name: 'Siparişler',
+    icon: 'fa-solid fa-file-invoice',
+    url: '/orders',
+    isTitle: false,
+    subMenus: [],
+  },
 ];
