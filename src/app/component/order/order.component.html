@@ -50,17 +50,17 @@
                   <i class="fa-solid fa-x"></i>
               </button>
           </div>
-          <form formValidate #createForm="ngForm" autocomplete="off">
+          <form formValidate #createForm="ngForm" autocomplete="off" (ngSubmit)="create(createForm)">
               <div class="modal-body">
                   <div class="form-group">
                       <label>Tarih</label>
-                      <input type="date" required  class="form-control" name="date">
+                      <input type="date" required [(ngModel)]="createModel.date" class="form-control" name="date">
                       <div class="invalid-feedback"></div>
                   </div>
 
                   <div class="form-group mt-2">
                       <label>Müşteri</label>
-                      <select class="form-control" name="customer"  required>
+                      <select class="form-control" name="customer" [(ngModel)]="createModel.customerId" required>
                           @for(customer of customers; track customer){
                               <option [value]="customer.id">{{customer.name}}</option>
                           }
@@ -70,7 +70,7 @@
 
                   <div class="form-group mt-2">
                       <label>Teslim Tarih</label>
-                      <input type="date" required  class="form-control" name="deliveryDate">
+                      <input type="date" required [(ngModel)]="createModel.deliveryDate" class="form-control" name="deliveryDate">
                       <div class="invalid-feedback"></div>
                   </div>
 
@@ -81,7 +81,7 @@
                           <div class="col-3">
                               <div class="form-group">
                                   <label>Ürün</label>
-                                  <select class="form-control">
+                                  <select class="form-control" [(ngModel)]="createDetail.productId" [ngModelOptions]="{standalone:true}">
                                       @for(product of products; track product){
                                           <option [value]="product.id">{{product.name}}</option>
                                       }
@@ -91,24 +91,24 @@
                           <div class="col-3">
                               <div class="form-group">
                                   <label>Adet</label>
-                                  <input class="form-control" >
+                                  <input class="form-control" [(ngModel)]="createDetail.quantity" [ngModelOptions]="{standalone:true}">
                               </div>
                           </div>
                           <div class="col-3">
                               <div class="form-group">
                                   <label>Birim Fiyatı</label>
-                                  <input class="form-control">
+                                  <input class="form-control" [(ngModel)]="createDetail.price" [ngModelOptions]="{standalone:true}">
                               </div>
                           </div>
                           <div class="col-3">
                               <div class="form-group">
                                   <label>Toplam</label>
                                   <br>
-                                  <label></label>
+                                  <label>{{(createDetail.price * createDetail.quantity)}}</label>
                               </div>
                           </div>
                           <div class="col-12 mt-2">
-                              <button type="button" class="btn btn-dark" >Ekle</button>
+                              <button type="button" class="btn btn-dark" (click)="addDetail()">Ekle</button>
                           </div>
                       </div>
 
@@ -125,20 +125,20 @@
                                   </tr>
                               </thead>
                               <tbody>
-
+                                  @for(data of createModel.details;track data){
                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
+                                          <td>{{$index + 1}}</td>
+                                          <td>{{data.product.name}}</td>
+                                          <td>{{data.quantity}}</td>
+                                          <td>{{data.price}}</td>
+                                          <td>{{(data.price * data.quantity)}}</td>
                                           <td>
-                                              <button  class="btn btn-outline-danger btn-sm">
+                                              <button (click)="removeDetail($index)" class="btn btn-outline-danger btn-sm">
                                                   <i class="fa-solid fa-trash"></i>
                                               </button>
                                           </td>
                                       </tr>
-
+                                  }
                               </tbody>
                           </table>
                       </div>
