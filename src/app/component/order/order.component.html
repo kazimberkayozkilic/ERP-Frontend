@@ -36,7 +36,7 @@
                     <td>{{data.deliveryDate | date:'dd.MM.yyyy'}}</td>
                     <td>{{data.status.name}}</td>
                     <td>
-                      <button data-toggle="modal" data-target="#updateModal" class="btn btn-outline-primary btn-sm me-1">
+                      <button data-toggle="modal" data-target="#updateModal" (click)="get(data)" class="btn btn-outline-primary btn-sm me-1">
                         <i class="fa-solid fa-edit"></i>
                     </button>
                       <button (click)="deleteById(data)" class="btn btn-outline-danger btn-sm">

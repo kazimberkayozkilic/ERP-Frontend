@@ -24,19 +24,26 @@ export class OrderComponent {
   customers: CustomerModel[] = [];
   products: ProductModel[] = [];
   createDetail: OrderDetailModel = new OrderDetailModel();
+  updateDetail: OrderDetailModel = new OrderDetailModel();
 
   search: string = '';
 
-  @ViewChild("createModalCloseBtn") createModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
-
-  createModel:OrderModel = new OrderModel();
+  @ViewChild('createModalCloseBtn') createModalCloseBtn:
+    | ElementRef<HTMLButtonElement>
+    | undefined;
+  @ViewChild('updateModalCloseBtn') updateModalCloseBtn:
+    | ElementRef<HTMLButtonElement>
+    | undefined;
+  createModel: OrderModel = new OrderModel();
+  updateModel:OrderModel = new OrderModel();
   constructor(
     private http: HttpService,
     private swal: SwalService,
     private date: DatePipe
   ) {
-    this.createModel.date = this.date.transform(new Date(), "yyyy-MM-dd") ?? "";
-    this.createModel.deliveryDate = this.date.transform(new Date(), "yyyy-MM-dd") ?? "";
+    this.createModel.date = this.date.transform(new Date(), 'yyyy-MM-dd') ?? '';
+    this.createModel.deliveryDate =
+      this.date.transform(new Date(), 'yyyy-MM-dd') ?? '';
   }
 
   ngOnInit(): void {
@@ -63,9 +70,11 @@ export class OrderComponent {
     });
   }
 
-  addDetail(){
-    const product = this.products.find(p=> p.id == this.createDetail.productId);
-    if(product){
+  addDetail() {
+    const product = this.products.find(
+      (p) => p.id == this.createDetail.productId
+    );
+    if (product) {
       this.createDetail.product = product;
     }
 
@@ -73,13 +82,15 @@ export class OrderComponent {
     this.createDetail = new OrderDetailModel();
   }
 
-  create(form: NgForm){
-    if(form.valid){
-      this.http.post<string>("Orders/Create",this.createModel,(res)=> {
+  create(form: NgForm) {
+    if (form.valid) {
+      this.http.post<string>('Orders/Create', this.createModel, (res) => {
         this.swal.callToast(res);
         this.createModel = new OrderModel();
-        this.createModel.date = this.date.transform(new Date(), "yyyy-MM-dd") ?? "";
-        this.createModel.deliveryDate = this.date.transform(new Date(), "yyyy-MM-dd") ?? "";
+        this.createModel.date =
+          this.date.transform(new Date(), 'yyyy-MM-dd') ?? '';
+        this.createModel.deliveryDate =
+          this.date.transform(new Date(), 'yyyy-MM-dd') ?? '';
 
         this.createModalCloseBtn?.nativeElement.click();
         this.getAll();
@@ -87,16 +98,24 @@ export class OrderComponent {
     }
   }
 
-  removeDetail(index:number){
-    this.createModel.details.splice(index,1);
+  removeDetail(index: number) {
+    this.createModel.details.splice(index, 1);
   }
 
-  deleteById(model: OrderModel){
-    this.swal.callSwal("Siparişi Sil?",`${model.customer.name} - ${model.number} numaralı siparişi silmek istiyor musunuz?`,()=> {
-      this.http.post<string>("Orders/DeleteById",{id: model.id},(res)=> {
-        this.getAll();
-        this.swal.callToast(res,"info");
-      });
-    })
+  deleteById(model: OrderModel) {
+    this.swal.callSwal(
+      'Siparişi Sil?',
+      `${model.customer.name} - ${model.number} numaralı siparişi silmek istiyor musunuz?`,
+      () => {
+        this.http.post<string>('Orders/DeleteById', { id: model.id }, (res) => {
+          this.getAll();
+          this.swal.callToast(res, 'info');
+        });
+      }
+    );
+  }
+
+  get(model: OrderModel){
+    this.updateModel = {...model};
   }
 }
