@@ -118,4 +118,17 @@ export class OrderComponent {
   get(model: OrderModel){
     this.updateModel = {...model};
   }
+
+  addUpdateDetail(){
+    const product = this.products.find(p=> p.id == this.updateDetail.productId);
+    if(product){
+      this.updateDetail.product = product;
+    }
+    this.updateModel.details.push(this.updateDetail);
+    this.updateDetail = new OrderDetailModel();
+  }
+
+  removeUpdateDetail(index:number){
+    this.updateModel.details.splice(index,1);
+  }
 }
