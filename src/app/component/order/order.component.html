@@ -36,6 +36,9 @@
                     <td>{{data.deliveryDate | date:'dd.MM.yyyy'}}</td>
                     <td>{{data.status.name}}</td>
                     <td>
+                      <button data-toggle="modal" data-target="#updateModal" class="btn btn-outline-primary btn-sm me-1">
+                        <i class="fa-solid fa-edit"></i>
+                    </button>
                       <button (click)="deleteById(data)" class="btn btn-outline-danger btn-sm">
                         <i class="fa-solid fa-trash"></i>
                     </button>
@@ -153,6 +156,116 @@
               </div>
               <div class="modal-footer">
                   <button type="submit" class="btn btn-dark w-100">Kaydet</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+<div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5">Sipariş Güncelleme Formu</h1>
+              <button type="button" #updateModalCloseBtn class="btn btn-outline-danger" data-dismiss="modal">
+                  <i class="fa-solid fa-x"></i>
+              </button>
+          </div>
+          <form formValidate #updateForm="ngForm" autocomplete="off">
+              <div class="modal-body">
+                  <div class="form-group">
+                      <label>Tarih</label>
+                      <input type="date"  class="form-control" name="updateDate">
+                      <div class="invalid-feedback"></div>
+                  </div>
+
+                  <div class="form-group mt-2">
+                      <label>Müşteri</label>
+                      <select class="form-control" name="updateCustomer" required>
+                          @for(customer of customers; track customer){
+                              <option [value]="customer.id">{{customer.name}}</option>
+                          }
+                      </select>
+                      <div class="invalid-feedback"></div>
+                  </div>
+
+                  <div class="form-group mt-2">
+                      <label>Teslim Tarih</label>
+                      <input type="date" required class="form-control" name="updateDeliveryDate">
+                      <div class="invalid-feedback"></div>
+                  </div>
+
+                  <hr>
+
+                  <div class="form-group mt-2">
+                      <div class="row">
+                          <div class="col-3">
+                              <div class="form-group">
+                                  <label>Ürün</label>
+                                  <select class="form-control">
+                                      @for(product of products; track product){
+                                          <option [value]="product.id">{{product.name}}</option>
+                                      }
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-3">
+                              <div class="form-group">
+                                  <label>Adet</label>
+                                  <input class="form-control">
+                              </div>
+                          </div>
+                          <div class="col-3">
+                              <div class="form-group">
+                                  <label>Birim Fiyatı</label>
+                                  <input class="form-control">
+                              </div>
+                          </div>
+                          <div class="col-3">
+                              <div class="form-group">
+                                  <label>Toplam</label>
+                                  <br>
+                                  <label></label>
+                              </div>
+                          </div>
+                          <div class="col-12 mt-2">
+                              <button type="button" class="btn btn-dark" >Ekle</button>
+                          </div>
+                      </div>
+
+                      <div class="mt-2">
+                          <table class="table table-hover">
+                              <thead>
+                                  <tr>
+                                      <th>#</th>
+                                      <th>Ürün Adı</th>
+                                      <th>Adedi</th>
+                                      <th>Birim Fiyatı</th>
+                                      <th>Toplam</th>
+                                      <th>İşlemler</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+
+                                      <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td>
+                                              <button class="btn btn-outline-danger btn-sm">
+                                                  <i class="fa-solid fa-trash"></i>
+                                              </button>
+                                          </td>
+                                      </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary w-100">Güncelle</button>
               </div>
           </form>
       </div>
