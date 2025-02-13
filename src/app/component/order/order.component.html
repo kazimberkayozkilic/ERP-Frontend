@@ -171,7 +171,7 @@
                   <i class="fa-solid fa-x"></i>
               </button>
           </div>
-          <form formValidate #updateForm="ngForm" autocomplete="off">
+          <form formValidate #updateForm="ngForm" autocomplete="off" (ngSubmit)="update(updateForm)">
               <div class="modal-body">
                   <div class="form-group">
                       <label>Tarih</label>

@@ -131,4 +131,14 @@ export class OrderComponent {
   removeUpdateDetail(index:number){
     this.updateModel.details.splice(index,1);
   }
+
+  update(form: NgForm){
+    if(form.valid){
+      this.http.post<string>("Orders/Update",this.updateModel,(res)=> {
+        this.swal.callToast(res,"info");
+        this.updateModalCloseBtn?.nativeElement.click();
+        this.getAll();
+      });
+    }
+  }
 }
