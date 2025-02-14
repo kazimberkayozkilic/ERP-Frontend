@@ -36,15 +36,19 @@
                     <td>{{data.deliveryDate | date:'dd.MM.yyyy'}}</td>
                     <td [ngClass]="setStatusClass(data.status.value)">{{data.status.name}}</td>
                     <td>
-
-                            <button data-toggle="modal" data-target="#updateModal" (click)="get(data)" class="btn btn-outline-primary btn-sm me-1">
-                                <i class="fa-solid fa-edit"></i>
-                            </button>
-                            <button (click)="deleteById(data)" class="btn btn-outline-danger btn-sm">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-
-                    </td>
+                      @if(data.status.value < 3){
+                        <a class="btn btn-outline-dark me-1" href="requirements-planning/{{data.id}}" target="_blank" (click)="getAll()">
+                          <i class="fa-solid fa-list"></i>
+                          İhtiyaç Planlaması Çalıştır
+                      </a>
+                          <button data-toggle="modal" data-target="#updateModal" (click)="get(data)" class="btn btn-outline-primary btn-sm me-1">
+                              <i class="fa-solid fa-edit"></i>
+                          </button>
+                          <button (click)="deleteById(data)" class="btn btn-outline-danger btn-sm">
+                              <i class="fa-solid fa-trash"></i>
+                          </button>
+                      }
+                  </td>
                 </tr>
                 }
             </tbody>
