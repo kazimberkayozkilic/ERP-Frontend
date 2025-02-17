@@ -18,7 +18,8 @@ export const routes: Routes = [
   },
   {
     path: "requirements-planning/:orderId",
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [()=> inject(AuthServiceService).isAuthenticated()]
   },
   {
     path: "",
