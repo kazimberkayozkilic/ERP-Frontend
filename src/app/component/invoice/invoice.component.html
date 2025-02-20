@@ -1,1 +1,50 @@
-<p>invoice works!</p>
+<app-blank pageName="..... Faturaları">
+  <app-section sectionTitle="...... Fatura Listesi">
+      <div class="form-group row">
+          <div class="col-9">
+              <button class="btn btn-dark" data-toggle="modal" data-target="#createModal">
+                  <i class="fa-solid fa-plus me-1"></i>
+                   Faturası Ekle
+              </button>
+          </div>
+
+          <div class="col-3">
+              <input  type="search" class="form-control" placeholder="Aranacak değer girin...">
+          </div>
+      </div>
+
+      <div class="form-group mt-2">
+          <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Tarih</th>
+                      <th>Fatura Numarası</th>
+                      <th>Müşteri</th>
+                      <th>İşlemler</th>
+                  </tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                          <button data-toggle="modal" data-target="#updateModal"
+                              class="btn btn-outline-primary btn-sm me-1">
+                              <i class="fa-solid fa-edit"></i>
+                          </button>
+                          <button  class="btn btn-outline-danger btn-sm">
+                              <i class="fa-solid fa-trash"></i>
+                          </button>
+                      </td>
+                  </tr>
+
+              </tbody>
+          </table>
+      </div>
+  </app-section>
+</app-blank>
+
