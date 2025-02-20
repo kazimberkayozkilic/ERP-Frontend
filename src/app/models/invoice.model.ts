@@ -1,4 +1,5 @@
 import { CustomerModel } from "./customer.model";
+import { InvoiceDetailModel } from "./invoice-detail.model";
 
 export class InvoiceModel {
   id: string = '';
@@ -8,6 +9,7 @@ export class InvoiceModel {
   customerId: string = '';
   customer: CustomerModel = new CustomerModel();
   type: InvoiceTypeEnum = new InvoiceTypeEnum();
+  details: InvoiceDetailModel[] = [];
 }
 
 export class InvoiceTypeEnum{
