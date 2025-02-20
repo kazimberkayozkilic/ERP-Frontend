@@ -3,7 +3,7 @@ import { InvoiceDetailModel } from "./invoice-detail.model";
 
 export class InvoiceModel {
   id: string = '';
-  oinvoiceNumber: number = 0;
+  invoiceNumber: number = 0;
   date: string = '';
   deliveryDate: string = '';
   customerId: string = '';
