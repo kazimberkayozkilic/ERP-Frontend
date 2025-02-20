@@ -189,3 +189,126 @@
       </div>
   </div>
 </div>
+
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5">..... Fatura Güncelleme Formu</h1>
+              <button type="button" #updateModalCloseBtn class="btn btn-outline-danger" data-dismiss="modal">
+                  <i class="fa-solid fa-x"></i>
+              </button>
+          </div>
+          <form formValidate #updateForm="ngForm" autocomplete="off" >
+              <div class="modal-body">
+                  <div class="form-group">
+                      <label>Tarih</label>
+                      <input type="date" required  class="form-control"
+                          name="updateDate">
+                      <div class="invalid-feedback"></div>
+                  </div>
+
+                  <div class="form-group">
+                      <label>Fatura Numarası</label>
+                      <input type="text" required class="form-control" name="updateInvoiceNumber" required maxlength="16">
+                      <div class="invalid-feedback"></div>
+                  </div>
+
+                  <div class="form-group mt-2">
+                      <label>Müşteri</label>
+                      <br>
+                      <span></span>
+                  </div>
+                  <hr>
+
+                  <div class="form-group mt-2">
+                      <div class="row">
+                          <div class="col-3">
+                              <div class="form-group">
+                                  <label>Ürün</label>
+                                  <select class="form-control" >
+
+                                      <option ></option>
+
+                                  </select>
+                              </div>
+                          </div>
+
+                          <div class="col-3">
+                              <div class="form-group">
+                                  <label>Depo</label>
+                                  <select class="form-control" >
+
+                                      <option></option>
+
+                                  </select>
+                              </div>
+                          </div>
+
+                          <div class="col-2">
+                              <div class="form-group">
+                                  <label>Adet</label>
+                                  <input class="form-control">
+                              </div>
+                          </div>
+                          <div class="col-2">
+                              <div class="form-group">
+                                  <label>Birim Fiyatı</label>
+                                  <input class="form-control">
+                              </div>
+                          </div>
+                          <div class="col-2">
+                              <div class="form-group">
+                                  <label>Toplam</label>
+                                  <br>
+                                  <label></label>
+                              </div>
+                          </div>
+                          <div class="col-12 mt-2">
+                              <button type="button" class="btn btn-dark" >Ekle</button>
+                          </div>
+                      </div>
+
+                      <div class="mt-2">
+                          <table class="table table-hover">
+                              <thead>
+                                  <tr>
+                                      <th>#</th>
+                                      <th>Ürün Adı</th>
+                                      <th>Depo Adı</th>
+                                      <th>Adedi</th>
+                                      <th>Birim Fiyatı</th>
+                                      <th>Toplam</th>
+                                      <th>İşlemler</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+
+                                  <tr>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td>
+                                          <button
+                                              class="btn btn-outline-danger btn-sm">
+                                              <i class="fa-solid fa-trash"></i>
+                                          </button>
+                                      </td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary w-100">Güncelle</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
