@@ -11,6 +11,7 @@ import { RecipesComponent } from './component/recipes/recipes.component';
 import { RecipeDetailsComponent } from './component/recipe-details/recipe-details.component';
 import { OrderComponent } from './component/order/order.component';
 import { RequirementsPlanningComponent } from './component/requirements-planning/requirements-planning.component';
+import { InvoiceComponent } from './component/invoice/invoice.component';
 
 export const routes: Routes = [
   {
@@ -54,6 +55,14 @@ export const routes: Routes = [
       {
         path:"orders",
         component: OrderComponent
+      },
+      {
+        path:"invoices/purchase",
+        component: InvoiceComponent
+      },
+      {
+        path:"invoices/selling",
+        component: InvoiceComponent
       }
     ]
   },

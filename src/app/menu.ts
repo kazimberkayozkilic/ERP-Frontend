@@ -66,14 +66,14 @@ export const Menus: MenuModel[] = [
       {
         name: 'Alış Faturaları',
         icon: 'fa-solid fa-arrow-down',
-        url: '/purchase-invoices',
+        url: '/invoices/purchase',
         isTitle: false,
         subMenus: [],
       },
       {
         name: 'Satış Faturaları',
         icon: 'fa-solid fa-arrow-up',
-        url: '/selling-invoices',
+        url: '/invoices/selling',
         isTitle: false,
         subMenus: [],
       }
