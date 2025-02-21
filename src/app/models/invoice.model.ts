@@ -9,7 +9,9 @@ export class InvoiceModel {
   customerId: string = '';
   customer: CustomerModel = new CustomerModel();
   type: InvoiceTypeEnum = new InvoiceTypeEnum();
+  typeValue: number = 1;
   details: InvoiceDetailModel[] = [];
+  orderId?: string | null = null;
 }
 
 export class InvoiceTypeEnum{
