@@ -39,5 +39,13 @@ getAll(){
   });
 }
 
+deleteById(model: InvoiceModel){
+  this.swal.callSwal("Faturayı Sil?",`${model.customer.name} - ${model.invoiceNumber} numaralı faturayı silmek istiyor musunuz?`,()=> {
+    this.http.post<string>("Invoices/DeleteById",{id: model.id},(res)=> {
+      this.getAll();
+      this.swal.callToast(res,"info");
+    });
+  })
+}
 
 }
