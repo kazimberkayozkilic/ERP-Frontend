@@ -25,7 +25,7 @@
                   </tr>
               </thead>
               <tbody>
-                  @for(data of invoices ;track data){
+                  @for(data of invoices| invoice: search ;track data){
                   <tr>
                       <td>{{$index + 1}}</td>
                       <td>{{data.date | date:'dd.MM.yyyy'}}</td>

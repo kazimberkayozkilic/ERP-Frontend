@@ -12,7 +12,7 @@ import { InvoicePipe } from '../../pipes/invoice.pipe';
 @Component({
   selector: 'app-invoice',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, InvoicePipe],
   templateUrl: './invoice.component.html',
   styleUrl: './invoice.component.css'
 })
