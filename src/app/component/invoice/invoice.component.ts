@@ -7,6 +7,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { SwalService } from '../../sevices/swal.service';
 import { DepotModel } from '../../models/depot.model';
 import { ActivatedRoute } from '@angular/router';
+import { InvoicePipe } from '../../pipes/invoice.pipe';
 
 @Component({
   selector: 'app-invoice',
@@ -19,7 +20,8 @@ export class InvoiceComponent {
 invoices: InvoiceModel[] = [];
 customer: CustomerModel[] = [];
 depots: DepotModel[]=[];
-search: string="";type: number = 1;
+search: string="";
+type: number = 1;
 typeName: string = "Alış";
 constructor(private http: HttpService, private swal: SwalService, private activated: ActivatedRoute) {
   this.activated.params.subscribe(res=> {
