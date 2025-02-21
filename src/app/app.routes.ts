@@ -57,13 +57,9 @@ export const routes: Routes = [
         component: OrderComponent
       },
       {
-        path:"invoices/purchase",
+        path:"invoices/:type",
         component: InvoiceComponent
       },
-      {
-        path:"invoices/selling",
-        component: InvoiceComponent
-      }
     ]
   },
 ];
