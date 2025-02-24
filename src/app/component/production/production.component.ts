@@ -5,11 +5,12 @@ import { SwalService } from '../../sevices/swal.service';
 import { DepotModel } from '../../models/depot.model';
 import { ProductModel } from '../../models/product.model';
 import { ProductionModel } from '../../models/production.model';
+import { ProductionPipe } from '../../pipes/production.pipe';
 
 @Component({
   selector: 'app-production',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, ProductionPipe],
   templateUrl: './production.component.html',
   styleUrl: './production.component.css'
 })
