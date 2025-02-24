@@ -5,6 +5,7 @@ export class ProductionModel {
   id: string = '';
   productId: string = '';
   product: ProductModel = new ProductModel();
-  depotId: DepotModel = new DepotModel();
+  depot: DepotModel = new DepotModel();
+  depotId: string ="";
   quantity: number = 1;
 }
