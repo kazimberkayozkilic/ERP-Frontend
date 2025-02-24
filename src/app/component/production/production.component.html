@@ -34,9 +34,9 @@
                       <td>{{data.depot.name}}</td>
                       <td>{{data.quantity}}</td>
                       <td>
-                          <button class="btn btn-outline-danger btn-sm">
-                              <i class="fa-solid fa-trash"></i>
-                          </button>
+                        <button (click)="deleteById(data)" class="btn btn-outline-danger btn-sm">
+                          <i class="fa-solid fa-trash"></i>
+                      </button>
                       </td>
                   </tr>
                   }
@@ -56,31 +56,31 @@
                   <i class="fa-solid fa-x"></i>
               </button>
           </div>
-          <form formValidate  autocomplete="off">
+          <form formValidate #createForm="ngForm" autocomplete="off" (ngSubmit)="create(createForm)">
               <div class="modal-body">
                   <div class="form-group">
                       <label>Depo</label>
-                      <select class="form-control" name="depotId" required>
-
-                              <option></option>
-
+                      <select class="form-control" name="depotId" [(ngModel)]="createModel.depotId" required>
+                          @for(depot of depots; track depot){
+                              <option [value]="depot.id">{{depot.name}}</option>
+                          }
                       </select>
                       <div class="invalid-feedback"></div>
                   </div>
 
                   <div class="form-group">
                       <label>Ürün</label>
-                      <select class="form-control" name="productId" required>
-
-                              <option></option>
-
+                      <select class="form-control" name="productId" [(ngModel)]="createModel.productId" required>
+                          @for(product of products; track product){
+                              <option [value]="product.id">{{product.name}}</option>
+                          }
                       </select>
                       <div class="invalid-feedback"></div>
                   </div>
 
                   <div class="form-group mt-2">
                       <label>Adet</label>
-                      <input class="form-control"  name="quantity">
+                      <input class="form-control" required [(ngModel)]="createModel.quantity" name="quantity">
                       <div class="invalid-feedback"></div>
                   </div>
               </div>
