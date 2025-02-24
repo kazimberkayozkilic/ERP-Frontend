@@ -8,4 +8,5 @@ export class ProductionModel {
   depot: DepotModel = new DepotModel();
   depotId: string ="";
   quantity: number = 1;
+  createdAt: string ="";
 }
